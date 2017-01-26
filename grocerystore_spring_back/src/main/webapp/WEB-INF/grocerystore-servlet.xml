@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rep="http://www.springframework.org/schema/data/jpa"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jdbc="http://www.springframework.org/schema/c"
+       xmlns:security="http://www.springframework.org/schema/p" xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="grocerystore"/>
+
+
+    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8" /></bean>
+
+
+    <!--<bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+        <property name="viewClass"  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix">
+            <value>/WEB-INF/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <sec:http auto-config="true">
+        <sec:intercept-url pattern="/" access="permitAll" />
+        <sec:intercept-url pattern="/CartList" access="hasRole('ROLE_USER')"/>
+        <sec:intercept-url pattern="/CartAdd" access="hasRole('ROLE_USER')"/>
+        <sec:intercept-url pattern="/CartRemove" access="hasRole('ROLE_USER')"/>
+        <sec:intercept-url pattern="/GroceryList" access="permitAll" />
+        <sec:intercept-url pattern="/GroceryListAdmin" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/GroceryEdit" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/GroceryDel" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/GroceryAdd" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/OrderList" access="hasRole('ROLE_USER')"/>
+        <sec:intercept-url pattern="/OrderListAdmin" access="hasRole('ROLE_ADMIN')"/>
+        <sec:intercept-url pattern="/OrderEdit" access="hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')"/>
+        <sec:intercept-url pattern="/OrderAdd" access="hasRole('ROLE_USER')"/>
+        <sec:access-denied-handler error-page="/Deny" />
+        <sec:csrf disabled="true"/>
+        <sec:form-login
+                login-page="/Login"
+                username-parameter="email"
+                password-parameter="password"
+                default-target-url="/Index"/>
+
+        <sec:custom-filter before="FORM_LOGIN_FILTER" ref="customUsernamePasswordAuthenticationFilter"/>
+    </sec:http>
+
+    <sec:authentication-manager id="authenticationManager">
+        <sec:authentication-provider user-service-ref="userDetailsService">
+            <sec:password-encoder ref="encoder" />
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+    <bean id="encoder" class="grocerystore.services.security.GrocerystorePasswordEncoder" />
+    <bean id="userDetailsService" class="grocerystore.services.security.UserDetailsServiceImpl"/>
+
+
+
+    <bean id="customUsernamePasswordAuthenticationFilter"
+                class="grocerystore.services.security.GrocerystoreUsernamePasswordAuthenticationFilter">
+        <property name="authenticationFailureHandler" ref="failureHandler"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+    </bean>
+
+
+    <bean id="failureHandler"
+                class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/Login?error=true"/>
+    </bean>-->
+
+
+
+
+    <jee:jndi-lookup id="dataSource"
+                     jndi-name="jdbc/mysqldb"
+                     resource-ref="true" />
+
+    <rep:repositories base-package="grocerystore.domain.repositories"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="grocerystore.domain.entityes"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="grocerystore.services.exceptions.GroceryServiceException">
+                    exception
+                </prop>
+                <prop key="grocerystore.services.exceptions.CartServiceException">
+                    exception
+                </prop>
+                <prop key="grocerystore.services.exceptions.UserServiceException">
+                    exception
+                </prop>
+                <prop key="grocerystore.services.exceptions.AccountServiceException">
+                    exception
+                </prop>
+                <prop key="grocerystore.services.exceptions.GroceryServiceException">
+                    exception
+                </prop>
+                <prop key="grocerystore.services.exceptions.OrderServiceException">
+                    exception
+                </prop>
+            </props>
+        </property>
+        <property name="defaultErrorView" value="defaultexception"/>
+    </bean>-->
+
+    <bean id="accountService" class="grocerystore.services.concrete.AccountService" />
+    <bean id="cartService" class="grocerystore.services.concrete.CartService" />
+    <bean id="groceryStore" class="grocerystore.services.concrete.GroceryService" />
+    <bean id="listGroceryService" class="grocerystore.services.concrete.ListGroceryService" />
+    <bean id="orderService" class="grocerystore.services.concrete.OrderService" />
+    <bean id="userService" class="grocerystore.services.concrete.UserService" />
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="AccountService"/>
+        <property name="service" ref="accountService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IAccountService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="CartService"/>
+        <property name="service" ref="cartService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.ICartService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="GroceryService"/>
+        <property name="service" ref="groceryStore"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IGroceryService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ListGroceryService"/>
+        <property name="service" ref="listGroceryService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IListGroceryService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="OrderService"/>
+        <property name="service" ref="orderService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IOrderService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="UserService"/>
+        <property name="service" ref="userService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IUserService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+</beans>
+
