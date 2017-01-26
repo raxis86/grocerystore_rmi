@@ -24,9 +24,4 @@ public class Tool {
         return BCRYPT.encode(password);
     }
 
-
-    public static void main(String[] args) {
-
-    }
-
 }

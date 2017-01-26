@@ -11,6 +11,7 @@ import grocerystore.services.exceptions.UserServiceException;
 import grocerystore.services.models.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class OrderController {
     private IListGroceryService listGroceryService;
     private IUserService userService;
 
+    @Autowired
     public OrderController(IOrderService orderService,IListGroceryService listGroceryService,IUserService userService){
         this.orderService=orderService;
         this.listGroceryService=listGroceryService;

@@ -2,7 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:rep="http://www.springframework.org/schema/data/jpa"
        xmlns:sec="http://www.springframework.org/schema/security"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jdbc="http://www.springframework.org/schema/c"
        xmlns:security="http://www.springframework.org/schema/p" xmlns:jee="http://www.springframework.org/schema/jee"
@@ -10,8 +9,6 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/data/jpa
-        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/mvc
@@ -71,11 +68,14 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <bean id="encoder" class="grocerystore.services.security.GrocerystorePasswordEncoder" />
-    <bean id="userDetailsService" class="grocerystore.services.security.UserDetailsServiceImpl">
+    <!--<bean id="encoder" class="grocerystore.services.security.GrocerystorePasswordEncoder" />-->
 
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <bean id="userDetailsService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/userDetailsService" />
+        <property name="serviceInterface" value="org.springframework.security.core.userdetails.UserDetailsService" />
     </bean>
-
 
 
     <bean id="customUsernamePasswordAuthenticationFilter"
@@ -93,7 +93,57 @@
 
 
 
-    <jee:jndi-lookup id="dataSource"
+
+
+
+    <!--<bean class="grocerystore.controllers.AccountController">
+        <constructor-arg name="accountService" ref="accountService"/>
+        <constructor-arg name="userService" ref="userService"/>
+    </bean>
+    <bean class="grocerystore.controllers.CartController">
+        <constructor-arg name="cartService" ref="cartService"/>
+    </bean>
+    <bean class="grocerystore.controllers.GroceryController">
+        <constructor-arg name="groceryService" ref="groceryService"/>
+    </bean>
+    <bean class="grocerystore.controllers.OrderController">
+        <constructor-arg name="listGroceryService" ref="listGroceryService"/>
+        <constructor-arg name="orderService" ref="orderService"/>
+        <constructor-arg name="userService" ref="userService" />
+    </bean>-->
+
+
+
+    <bean id="accountService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/AccountService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IAccountService"/>
+    </bean>
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/UserService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IUserService"/>
+    </bean>
+    <bean id="cartService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/CartService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.ICartService"/>
+    </bean>
+    <bean id="groceryService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/GroceryService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IGroceryService"/>
+    </bean>
+    <bean id="listGroceryService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/ListGroceryService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IListGroceryService"/>
+    </bean>
+    <bean id="orderService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1199/OrderService"/>
+        <property name="serviceInterface" value="grocerystore.services.abstracts.IOrderService"/>
+    </bean>
+
+
+
+
+
+    <!--<jee:jndi-lookup id="dataSource"
                      jndi-name="jdbc/mysqldb"
                      resource-ref="true" />
 
@@ -115,7 +165,7 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-
+-->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>

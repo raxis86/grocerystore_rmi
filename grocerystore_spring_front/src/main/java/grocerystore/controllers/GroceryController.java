@@ -3,7 +3,6 @@ package grocerystore.controllers;
 import grocerystore.services.abstracts.IGroceryService;
 import grocerystore.services.exceptions.FormGroceryException;
 import grocerystore.services.exceptions.GroceryServiceException;
-import grocerystore.services.models.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ public class GroceryController {
 
     private IGroceryService groceryService;
 
+    @Autowired
     public GroceryController(IGroceryService groceryService){
         this.groceryService=groceryService;
     }

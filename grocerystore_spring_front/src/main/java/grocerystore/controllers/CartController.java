@@ -22,6 +22,7 @@ public class CartController {
 
     private ICartService cartService;
 
+    @Autowired
     public CartController(ICartService cartService){
         this.cartService=cartService;
     }

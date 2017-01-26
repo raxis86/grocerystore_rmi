@@ -7,6 +7,7 @@ import grocerystore.services.exceptions.FormUserException;
 import grocerystore.services.exceptions.UserServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -27,6 +28,7 @@ public class AccountController {
     private IAccountService accountService;
     private IUserService userService;
 
+    @Autowired
     public AccountController(IAccountService accountService,IUserService userService){
         this.accountService=accountService;
         this.userService=userService;
