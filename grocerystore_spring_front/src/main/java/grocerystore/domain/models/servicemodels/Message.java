@@ -1,8 +1,9 @@
-package grocerystore.services.models;
+package grocerystore.domain.models.servicemodels;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by raxis on 27.12.2016.
  * Для хранения сообщений об операциях
  */
-public class Message {
+public class Message implements Serializable{
     private static final Logger logger = LoggerFactory.getLogger(Message.class);
 
     private String messagesOk;

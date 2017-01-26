@@ -3,15 +3,13 @@ package grocerystore.services.concrete;
 import grocerystore.domain.entityes.Grocery;
 import grocerystore.domain.entityes.ListGrocery;
 import grocerystore.domain.models.Grocery_model;
-import grocerystore.domain.models.ListGrocery_model;
 import grocerystore.domain.repositories.GroceryRepository;
 import grocerystore.domain.repositories.ListGroceryRepository;
 import grocerystore.services.abstracts.IGroceryService;
 import grocerystore.services.exceptions.FormGroceryException;
 import grocerystore.services.exceptions.GroceryServiceException;
 import grocerystore.services.exceptions.ValidateException;
-import grocerystore.services.models.Converter;
-import grocerystore.services.models.Message;
+import grocerystore.domain.models.servicemodels.Message;
 import grocerystore.services.validators.abstracts.IValidator;
 import javafx.util.converter.BigDecimalStringConverter;
 import org.slf4j.Logger;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static grocerystore.services.models.Converter.convert;
+import static grocerystore.services.utils.Converter.convert;
 
 /**
  * Created by raxis on 29.12.2016.

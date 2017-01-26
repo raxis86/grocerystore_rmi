@@ -3,7 +3,7 @@ package grocerystore.services.abstracts;
 import grocerystore.domain.models.Order_model;
 import grocerystore.domain.models.User_model;
 import grocerystore.services.exceptions.OrderServiceException;
-import grocerystore.services.models.Cart;
+import grocerystore.domain.models.servicemodels.Cart;
 import grocerystore.domain.models.viewmodels.OrderView;
 
 import java.util.List;

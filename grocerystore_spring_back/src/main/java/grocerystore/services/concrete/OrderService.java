@@ -8,7 +8,7 @@ import grocerystore.domain.models.*;
 import grocerystore.domain.repositories.*;
 import grocerystore.services.abstracts.IOrderService;
 import grocerystore.services.exceptions.OrderServiceException;
-import grocerystore.services.models.Cart;
+import grocerystore.domain.models.servicemodels.Cart;
 import grocerystore.domain.models.viewmodels.OrderView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static grocerystore.services.models.Converter.convert;
+import static grocerystore.services.utils.Converter.convert;
 
 /**
  * Created by raxis on 29.12.2016.

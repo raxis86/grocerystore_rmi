@@ -10,7 +10,7 @@ import grocerystore.services.abstracts.IUserService;
 import grocerystore.services.exceptions.FormUserException;
 import grocerystore.services.exceptions.UserServiceException;
 import grocerystore.services.exceptions.ValidateException;
-import grocerystore.services.models.Message;
+import grocerystore.domain.models.servicemodels.Message;
 import grocerystore.services.validators.abstracts.IValidator;
 import grocerystore.tools.Tool;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static grocerystore.services.models.Converter.*;
+import static grocerystore.services.utils.Converter.*;
 
 /**
  * Created by raxis on 29.12.2016.

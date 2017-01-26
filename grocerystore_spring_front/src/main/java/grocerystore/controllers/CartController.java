@@ -1,12 +1,14 @@
 package grocerystore.controllers;
 
+import grocerystore.domain.models.Grocery_model;
 import grocerystore.services.abstracts.ICartService;
+import grocerystore.services.abstracts.IGroceryService;
 import grocerystore.services.exceptions.CartServiceException;
-import grocerystore.services.models.Cart;
+import grocerystore.domain.models.servicemodels.Cart;
+import grocerystore.services.exceptions.GroceryServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +23,12 @@ public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 
     private ICartService cartService;
+    private IGroceryService groceryService;
 
     @Autowired
-    public CartController(ICartService cartService){
+    public CartController(ICartService cartService, IGroceryService groceryService){
         this.cartService=cartService;
+        this.groceryService=groceryService;
     }
 
     @ModelAttribute("cart")
@@ -47,15 +51,17 @@ public class CartController {
 
     @RequestMapping(value = "CartAdd", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute("cart") Cart cart, @RequestParam("groceryid") String groceryid)
-                            throws CartServiceException {
-        cartService.addToCart(cart,groceryid);
+            throws CartServiceException, GroceryServiceException {
+        Grocery_model groceryModel = groceryService.getGrocery(groceryid);
+        cartService.addToCart(cart,groceryModel);
         return new ModelAndView("redirect:GroceryList");
     }
 
     @RequestMapping(value = "CartRemove", method = RequestMethod.POST)
     public ModelAndView remove(@ModelAttribute("cart") Cart cart, @RequestParam("groceryid") String groceryid)
-                               throws CartServiceException {
-        cartService.removeFromCart(cart,groceryid);
+            throws CartServiceException, GroceryServiceException {
+        Grocery_model groceryModel = groceryService.getGrocery(groceryid);
+        cartService.removeFromCart(cart,groceryModel);
         return new ModelAndView("redirect:CartList");
     }
 

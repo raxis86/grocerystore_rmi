@@ -3,13 +3,14 @@ package grocerystore.domain.models;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 /**
  * Created by raxis on 13.01.2017.
  */
-public class User_model {
+public class User_model implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(User_model.class);
 
     private UUID id;            //первичный ключ

@@ -1,4 +1,4 @@
-package grocerystore.services.models;
+package grocerystore.services.utils;
 
 import grocerystore.domain.entityes.*;
 import grocerystore.domain.models.*;

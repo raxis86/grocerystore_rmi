@@ -1,9 +1,10 @@
-package grocerystore.services.models;
+package grocerystore.domain.models.servicemodels;
 
 import grocerystore.domain.models.Grocery_model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -11,7 +12,7 @@ import java.util.*;
  * Created by raxis on 25.12.2016.
  * Корзина покупок
  */
-public class Cart {
+public class Cart implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(Cart.class);
 
     /**

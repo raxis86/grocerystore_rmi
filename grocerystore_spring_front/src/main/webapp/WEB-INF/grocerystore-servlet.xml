@@ -122,10 +122,10 @@
         <property name="serviceUrl" value="rmi://localhost:1199/UserService"/>
         <property name="serviceInterface" value="grocerystore.services.abstracts.IUserService"/>
     </bean>
-    <bean id="cartService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+    <!--<bean id="cartService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
         <property name="serviceUrl" value="rmi://localhost:1199/CartService"/>
         <property name="serviceInterface" value="grocerystore.services.abstracts.ICartService"/>
-    </bean>
+    </bean>-->
     <bean id="groceryService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
         <property name="serviceUrl" value="rmi://localhost:1199/GroceryService"/>
         <property name="serviceInterface" value="grocerystore.services.abstracts.IGroceryService"/>

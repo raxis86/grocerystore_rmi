@@ -1,8 +1,9 @@
 package grocerystore.services.exceptions;
 
-import grocerystore.services.models.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
 
 /**
  * Created by raxis on 06.01.2017.

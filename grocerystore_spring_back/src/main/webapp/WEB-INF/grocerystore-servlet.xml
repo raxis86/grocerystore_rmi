@@ -3,8 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:rep="http://www.springframework.org/schema/data/jpa"
-       xmlns:sec="http://www.springframework.org/schema/security"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jdbc="http://www.springframework.org/schema/c"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/c"
        xmlns:security="http://www.springframework.org/schema/p" xmlns:jee="http://www.springframework.org/schema/jee"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,8 +12,6 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-        http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/jee
@@ -141,24 +139,24 @@
     </bean>-->
 
     <bean id="accountService" class="grocerystore.services.concrete.AccountService" />
-    <bean id="cartService" class="grocerystore.services.concrete.CartService" />
+    <!--<bean id="cartService" class="grocerystore.services.concrete.CartService" />-->
     <bean id="groceryStore" class="grocerystore.services.concrete.GroceryService" />
     <bean id="listGroceryService" class="grocerystore.services.concrete.ListGroceryService" />
     <bean id="orderService" class="grocerystore.services.concrete.OrderService" />
     <bean id="userService" class="grocerystore.services.concrete.UserService" />
 
-    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter" >
         <property name="serviceName" value="AccountService"/>
         <property name="service" ref="accountService"/>
         <property name="serviceInterface" value="grocerystore.services.abstracts.IAccountService"/>
         <property name="registryPort" value="1199"/>
     </bean>
-    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <!--<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
         <property name="serviceName" value="CartService"/>
         <property name="service" ref="cartService"/>
         <property name="serviceInterface" value="grocerystore.services.abstracts.ICartService"/>
         <property name="registryPort" value="1199"/>
-    </bean>
+    </bean>-->
     <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
         <property name="serviceName" value="GroceryService"/>
         <property name="service" ref="groceryStore"/>

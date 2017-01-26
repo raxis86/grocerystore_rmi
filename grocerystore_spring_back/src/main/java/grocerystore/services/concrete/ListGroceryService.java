@@ -6,7 +6,7 @@ import grocerystore.domain.models.Order_model;
 import grocerystore.domain.repositories.ListGroceryRepository;
 import grocerystore.services.abstracts.IListGroceryService;
 import grocerystore.services.exceptions.ListGroceryServiceException;
-import grocerystore.services.models.Cart;
+import grocerystore.domain.models.servicemodels.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

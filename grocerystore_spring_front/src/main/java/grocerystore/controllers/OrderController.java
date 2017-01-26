@@ -8,7 +8,7 @@ import grocerystore.services.exceptions.FormUserException;
 import grocerystore.services.exceptions.ListGroceryServiceException;
 import grocerystore.services.exceptions.OrderServiceException;
 import grocerystore.services.exceptions.UserServiceException;
-import grocerystore.services.models.Cart;
+import grocerystore.domain.models.servicemodels.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

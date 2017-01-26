@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static grocerystore.services.models.Converter.*;
+import static grocerystore.services.utils.Converter.*;
 
 /**
  * Created by raxis on 29.12.2016.
