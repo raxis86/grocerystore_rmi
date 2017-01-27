@@ -16,6 +16,13 @@ compileTestJava{
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'common'
+    }
+}
+
+dependencies {
+    compile name: 'grocerystore-commons-0.0.1'
 }
 
 dependencies {
